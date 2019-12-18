@@ -8,13 +8,12 @@ const doctorRouter = require('./routes/doctorRouter.js');
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended : true }));
+app.use(express.static('public'));
 
 app.use('/', homeRouter);
 app.use('/patients', patientRouter);
-app.use('/doctors', doctorRouter);
+// app.use('/doctors', doctorRouter);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 })
-
-console.log(Math.floor(Math.random() * 2));

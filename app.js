@@ -7,7 +7,7 @@ const patientRouter = require('./routes/patientRouter.js');
 const doctorRouter = require('./routes/doctorRouter.js');
 
 app.set('view engine', 'ejs');
-// app.use(express.urlencoded({ extended : true }));
+app.use(express.urlencoded({ extended : true }));
 
 app.use('/', homeRouter);
 app.use('/patients', patientRouter);

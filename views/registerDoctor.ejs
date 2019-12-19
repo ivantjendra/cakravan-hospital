@@ -17,12 +17,11 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="/about">About<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/about">About</a>
           </li>
         </ul>
       </div>
     </nav>
-
 
     <div class="container">
       <div class="row">
@@ -30,19 +29,43 @@
         </div>
         <div class="col-sm" style="margin-top: 50px">
           <div>
-            <h1>Welcome to Cakravan Hospital.</h1>
+            <h1>Welcome on board Doc.</h1>
           </div>
-          <form style="margin-top: 50px">
+          <form style="margin-top: 30px" method="POST" action="/doctors/register">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name="name">
+            </div>
             <div class="form-group">
               <label for="username">Username</label>
-              <input type="text" class="form-control" id="username">
+              <input type="text" class="form-control" id="username" name="username">
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <label for="specialty">Specialty</label>
+              <select class="form-control" id="specialty" name="specialty">
+                <option value="headache">Headache</option>
+                <option value="nosebleed">Nosebleed</option>
+                <option value="cough">Cough</option>
+                <option value="fever">Fever</option>
+                <option value="diarrhea">Diarrhea</option>
+                <option value="vomitting">Vomitting</option>
+              </select>
             </div>
-            <button type="submit" class="btn btn-primary">Log in</button>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
           </form>
+          <br />
+          <p>Already a member?</p>
+          <p>Sign in <a href="/">here</a></p>
         </div>
         <div class="col-sm">
         </div>

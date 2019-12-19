@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   Patient.init({
     name: DataTypes.STRING,
     username: DataTypes.STRING,
-    pasword: DataTypes.STRING
+    password: DataTypes.STRING
   }, {
     sequelize
   })

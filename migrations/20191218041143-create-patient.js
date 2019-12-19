@@ -14,7 +14,7 @@ module.exports = {
       username: {
         type: Sequelize.STRING
       },
-      pasword: {
+      password: {
         type: Sequelize.STRING
       },
       symptom: {

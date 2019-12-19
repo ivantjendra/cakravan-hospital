@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Please enter a valid email'
         }, 
         isUnique() {
-          return Teacher.findOne({ 
+          return Patient.findOne({ 
             where: {
               [Op.and]: [{email: this.email}, {id: {[Op.ne]: this.id}}]
             } 

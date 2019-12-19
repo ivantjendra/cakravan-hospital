@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   })
   DoctorPatient.associate = function(models) {
     // associations can be defined here
+    DoctorPatient.belongsTo(models.Doctor)
+    DoctorPatient.belongsTo(models.Patient)
   };
   return DoctorPatient;
 };

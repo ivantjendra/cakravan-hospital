@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended : true }));
 app.use(express.static('public'));
 
 app.use('/', homeRouter);
-app.use('/patients', patientRouter);
+// app.use('/patients', patientRouter);
 app.use('/doctors', doctorRouter);
 
 app.listen(port, () => {

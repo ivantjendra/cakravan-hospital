@@ -13,6 +13,7 @@ class PatientController {
   }
 
   static add(req, res) {
+    // console.log(req.body)
     Patient.create(req.body)
       .then(patient => {
         res.redirect('/');

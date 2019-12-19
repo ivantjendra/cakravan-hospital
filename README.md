@@ -1,1 +1,2 @@
 # cakravan-hospital
+> sebuah aplikasi sederhana yang akan menampilkan interaksi antara dokter dan pasien, dimana dokter dapat memberikan rekomendasi obat2an yang cocok untuk gejala yg disampaikan oleh pasien

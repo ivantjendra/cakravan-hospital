@@ -1,6 +1,6 @@
 'use strict';
 const fs = require('fs');
-const data = fs.readFileSync('./doctorFixedHash.csv','utf8').split('\n');
+const data = fs.readFileSync('./patientFixedHash.csv','utf8').split('\n');
 
 let finalData = [];
 for (let i = 0; i < data.length; i++) {
@@ -11,7 +11,6 @@ for (let i = 0; i < data.length; i++) {
       username    : input[1],
       email       : input[2],
       password    : input[3],
-      specialist  : input[4]
     }
     finalData.push(obj);
   }
@@ -19,10 +18,10 @@ for (let i = 0; i < data.length; i++) {
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-   return queryInterface.bulkInsert('Doctors',finalData, {})
+   return queryInterface.bulkInsert('Patients',finalData, {})
   },
 
   down: (queryInterface, Sequelize) => {
-   return queryInterface.bulkDelete('Doctors',finalData, {})
+   return queryInterface.bulkDelete('Patients',finalData, {})
   }
 };

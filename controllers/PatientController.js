@@ -13,14 +13,14 @@ class PatientController {
   }
 
   static add(req, res) {
-    console.log(req.body)
-    // Patient.create(req.body)
-    //   .then(patient => {
-    //     res.redirect('/');
-    //   })
-    //   .catch(err => {
-    //     res.send(err);
-    //   })
+    // console.log(req.body)
+    Patient.create(req.body)
+      .then(patient => {
+        res.redirect('/');
+      })
+      .catch(err => {
+        res.send(err);
+      })
   }
 }
 

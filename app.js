@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 app.use('/', homeRouter);
 app.use('/patients', patientRouter);
-// app.use('/doctors', doctorRouter);
+app.use('/doctors', doctorRouter);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

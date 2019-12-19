@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const PatientController = require('../controllers/PatientController.js');
+const DoctorController = require('../controllers/DoctorController.js');
 const Model = require('../models');
 const Patient = Model.Patient;
 const Doctor = Model.Doctor;
@@ -13,7 +14,38 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   if(req.body.status === 'doctor') {
-    res.redirect('/doctors')
+    {
+      let doctorData = {};
+      Doctor.findOne({
+        where: {
+          username: req.body.username
+        }
+      })
+        .then(doctor => {
+          if(doctor) {
+            let checkPassword = helper(req.body.password, doctor.password);
+            if(checkPassword) {
+              doctorData = doctor;
+              return DoctorPatient.findAll({
+                include: Patient,
+                where: {
+                  DoctorId: doctor.id
+                }
+              })
+            } else {
+              res.render('index.ejs', {msg:'Wrong password'});
+            }
+          } else {
+            res.render('index.ejs', {msg:'Username not found'});
+          }
+        })
+        .then(doctorPatients => {
+          res.render('doctors.ejs', {data:doctorData, doctorPatients});
+        })
+        .catch(err => {
+          res.send(err);
+        })
+    }
   } else {
     let patientData = {};
     Patient.findOne({
@@ -118,8 +150,29 @@ router.post('/patients/:id/pickDoctor', (req, res) => {
     })
 })
 
+router.get('/doctors/:id/review', (req, res) => {
+  Doctor.findByPk(req.params.id)
+    .then(doctor => {
+      res.render('doctorReview.ejs', {data:doctor});
+    })
+    .catch(err => {
+      res.send(err);
+    })
+})
 
+router.get('/doctors', (req, res) => {
+  res.render('doctors.ejs');
+})
 
+router.get('/doctors/register', (req, res) => {
+  res.render('registerDoctor.ejs');
+})
+
+router.post('/doctors/register', DoctorController.add)
+
+router.get('/doctors/review', (req, res) => {
+  res.render('reviewDoctor.ejs')
+})
 
 
 

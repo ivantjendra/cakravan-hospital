@@ -48,8 +48,14 @@ router.post('/', (req, res) => {
   }
 })
 
-router.get('/patients/checkup', (req, res) => {
-  res.render('patientCheckup.ejs');
+router.get('/patients/:id/checkup', (req, res) => {
+  Patient.findByPk(req.params.id)
+    .then(patient => {
+      res.render('patientCheckup.ejs', {data:patient});
+    })
+    .catch(err => {
+      res.send(err);
+    })
 })
 
 router.get('/patients', (req, res) => {
@@ -62,9 +68,55 @@ router.get('/patients/register', (req, res) => {
 
 router.post('/patients/register', PatientController.add)
 
+router.post('/patients/:id/checkup', (req, res) => {
+  let doctorsData = [];
+  Doctor.findAll({
+    where: {
+      specialist: req.body.specialist
+    }
+  })
+    .then(doctors => {
+      doctorsData = doctors;
+      return Patient.findByPk(req.params.id)
+    })
+    .then(patient => {
+      res.render('patientPickDoctor.ejs', {data:patient, doctorsData})
+    })
+    .catch(err => {
+      res.send(err);
+    })
+})
 
-
-
+router.post('/patients/:id/pickDoctor', (req, res) => {
+  let patientData = {};
+  Doctor.findByPk(req.body.DoctorId)
+    .then(doctor => {
+      const data = {
+        DoctorId: doctor.id,
+        PatientId: req.params.id,
+        symptom: doctor.specialist 
+      }
+      return DoctorPatient.create(data)
+    })
+    .then(doctorPatient => {
+      return Patient.findByPk(req.params.id);
+    })
+    .then(patient => {
+      patientData = patient;
+      return DoctorPatient.findAll({
+        include: Doctor,
+        where: {
+          PatientId: patient.id
+        }
+      })
+    })
+    .then(doctorPatients => {
+      res.render('patients.ejs', {data:patientData, doctorPatients})
+    })
+    .catch(err => {
+      res.send(err);
+    })
+})
 
 
 
